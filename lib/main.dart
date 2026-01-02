@@ -1,10 +1,13 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_scan/view_models/qr_provider.dart';
 import 'package:qr_scan/views/qr_generate_screen.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized(); // 👈 VERY IMPORTANT
+  await Firebase.initializeApp();
   runApp(
     ChangeNotifierProvider(
       create: (_) => QRProvider(),

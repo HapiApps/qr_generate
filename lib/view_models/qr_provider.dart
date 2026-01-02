@@ -29,14 +29,15 @@ class QRProvider extends ChangeNotifier {
     final appLink = appStoreController.text.trim();
 
     if (playLink.isEmpty && appLink.isEmpty) return;
-    qrData = [
-      if (playLink.isNotEmpty) playLink,
-      if (appLink.isNotEmpty) appLink,
-    ].join('\n');
+    qrData =
+    "https://anpace.hapirides.in/link.php"
+        "?android=${Uri.encodeComponent(playLink)}"
+        "&ios=${Uri.encodeComponent(appLink)}";
 
     isGenerated = true;
     notifyListeners();
   }
+
   Future<bool> _requestPermission() async {
     if (Platform.isAndroid) {
       if (await Permission.storage.request().isGranted) return true;
